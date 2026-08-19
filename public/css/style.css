@@ -111,10 +111,12 @@ nav.main-nav a:hover{color:var(--gold);}
 .auth-visual p{color:rgba(255,255,255,0.78); max-width:38ch; font-size:0.98rem;}
 .auth-form-side{
   display:flex; align-items:center; justify-content:center; padding:60px 40px; background:var(--cream);
-}
-.auth-form-side{
-  display:flex; align-items:center; justify-content:center; padding:60px 40px; background:var(--cream);
   overflow-y:auto;
+}
+.auth-form-side .form-card{box-shadow:none; border:none; background:transparent; padding:0; max-width:400px; width:100%;}
+@media (max-width:860px){
+  .auth-split{grid-template-columns:1fr;}
+  .auth-visual{padding:40px 28px; min-height:280px;}
 }
 section{padding:72px 0;}
 .section-head{max-width:640px; margin-bottom:40px;}
