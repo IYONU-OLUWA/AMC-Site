@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title><%= title %> · Ajoshe Model College</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="/" class="brand">
+      <img src="/images/logo.png" alt="Ajoshe Model College crest">
+      <span class="brand-text">Ajoshe Model College<small>Ilorin, Kwara State</small></span>
+    </a>
+    <nav class="main-nav">
+      <a href="/about">About</a>
+      <a href="/admissions">Admissions</a>
+      <a href="/achievements">Achievements</a>
+      <a href="/news">News</a>
+      <a href="/events">Events</a>
+      <a href="/contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <% if (typeof currentUser !== 'undefined' && currentUser) { %>
+        <% if (currentUser.role === 'ADMIN') { %>
+          <a href="/admin" class="btn btn-outline">Admin</a>
+        <% } else { %>
+          <a href="/alumni" class="btn btn-outline">Directory</a>
+        <% } %>
+        <form action="/logout" method="POST" style="display:inline;">
+          <button type="submit" class="btn btn-gold">Log Out</button>
+        </form>
+      <% } else { %>
+        <a href="/login" class="btn btn-outline">Log In</a>
+        <a href="/signup" class="btn btn-gold">Join Alumni</a>
+      <% } %>
+    </div>
+  </div>
+</header>
+<div class="motto-strip">"Education is the Best Legacy"</div>
+
+<main>
+<% if (typeof messages !== 'undefined' && messages.error && messages.error.length) { %>
+  <div class="wrap" style="padding-top:20px;">
+    <% messages.error.forEach(function(m){ %><div class="flash flash-error"><%= m %></div><% }) %>
+  </div>
+<% } %>
+<% if (typeof messages !== 'undefined' && messages.success && messages.success.length) { %>
+  <div class="wrap" style="padding-top:20px;">
+    <% messages.success.forEach(function(m){ %><div class="flash flash-success"><%= m %></div><% }) %>
+  </div>
+<% } %>

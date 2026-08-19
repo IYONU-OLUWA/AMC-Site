@@ -1,0 +1,41 @@
+<%- include('partials/admin-header') %>
+
+<div class="admin-topbar">
+  <h1 style="font-size:1.5rem;">Dashboard</h1>
+</div>
+
+<div class="grid-3" style="margin-bottom:30px;">
+  <div class="stat">
+    <div class="num"><%= pendingCount %></div>
+    <div class="lbl">Pending alumni requests</div>
+  </div>
+  <div class="stat">
+    <div class="num"><%= alumniCount %></div>
+    <div class="lbl">Approved alumni</div>
+  </div>
+  <div class="stat">
+    <div class="num"><%= newsCount %></div>
+    <div class="lbl">News posts</div>
+  </div>
+</div>
+
+<div class="grid-2">
+  <a href="/admin/alumni-requests" class="card">
+    <h3 style="color: #069bd6;">Review alumni requests →</h3>
+    <p style="color: white;">Approve or reject new sign-ups before they appear in the public directory.</p>
+  </a>
+  <a href="/admin/news/new" class="card">
+    <h3 style="color: #069bd6;">Post an update →</h3>
+    <p style="color: white;">Share news with the alumni community and site visitors.</p>
+  </a>
+  <a href="/admin/content" class="card">
+    <h3 style="color: #069bd6;">Edit site content →</h3>
+    <p style="color: white;">Update the About, Founder, Admissions, and Achievements text.</p>
+  </a>
+  <a href="/admin/manage-admins" class="card">
+    <h3 style="color: #069bd6;">Manage admins →</h3>
+    <p style="color: white;">Give trusted alumni access to help run the site.</p>
+  </a>
+</div>
+
+<%- include('partials/admin-footer') %>

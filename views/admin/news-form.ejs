@@ -1,0 +1,22 @@
+<%- include('partials/admin-header') %>
+
+<div class="admin-topbar">
+  <h1 style="font-size:1.5rem;"><%= post ? 'Edit Post' : 'New Post' %></h1>
+</div>
+
+<form action="<%= post ? '/admin/news/' + post.id + '/edit' : '/admin/news' %>" method="POST" style="max-width:640px;">
+  <label for="title">Title</label>
+  <input type="text" id="title" name="title" value="<%= post ? post.title : '' %>" required>
+
+  <label for="body">Body</label>
+  <textarea id="body" name="body" style="min-height:260px;" required><%= post ? post.body : '' %></textarea>
+
+  <div class="checkbox-row">
+    <input type="checkbox" id="published" name="published" <%= (!post || post.published) ? 'checked' : '' %>>
+    <label for="published" style="margin:0;">Published (visible on the site)</label>
+  </div>
+
+  <button type="submit" class="btn btn-primary" style="margin-top:22px;"><%= post ? 'Save Changes' : 'Publish Post' %></button>
+</form>
+
+<%- include('partials/admin-footer') %>

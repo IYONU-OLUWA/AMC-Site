@@ -1,0 +1,27 @@
+<%- include('partials/header') %>
+
+<div class="auth-split">
+  <div class="auth-visual">
+    <span class="eyebrow">Welcome back</span>
+    <h1>Log in to the<br><span class="accent">AMC Alumni</span><br>Community</h1>
+    <p>Reconnect with classmates, catch up on school news, and stay part of Ajoshe Model College.</p>
+  </div>
+  <div class="auth-form-side">
+    <div class="form-card">
+      <h2>Log In</h2>
+      <p class="sub">Welcome back to the AMC alumni community.</p>
+      <form action="/login" method="POST">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit" class="btn btn-green form-submit">Log In</button>
+      </form>
+      <div class="form-foot">New here? <a href="/signup" style="color:var(--green-dark); font-weight:600;">Join the alumni directory</a></div>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

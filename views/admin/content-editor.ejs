@@ -1,0 +1,33 @@
+<%- include('partials/admin-header') %>
+
+<div class="admin-topbar">
+  <h1 style="font-size:1.5rem;">Edit Site Content</h1>
+</div>
+
+<p style="color:#5B6478; margin-bottom:24px; max-width:60ch;">
+  These fields feed directly into the About, Founder, Admissions, and Achievements pages. Leave a field blank and the site shows a placeholder until you fill it in.
+</p>
+
+<form action="/admin/content" method="POST" style="max-width:720px;">
+  <label for="about_history">About — History</label>
+  <textarea id="about_history" name="about_history"><%= content.about_history %></textarea>
+
+  <label for="about_mission">About — Mission</label>
+  <textarea id="about_mission" name="about_mission"><%= content.about_mission %></textarea>
+
+  <label for="founder_bio">Founder — Bio</label>
+  <textarea id="founder_bio" name="founder_bio"><%= content.founder_bio %></textarea>
+
+  <label for="admissions_info">Admissions — Process &amp; Requirements</label>
+  <textarea id="admissions_info" name="admissions_info"><%= content.admissions_info %></textarea>
+
+  <label for="exams_info">Admissions — External Exams</label>
+  <textarea id="exams_info" name="exams_info"><%= content.exams_info %></textarea>
+
+  <label for="achievements_info">Achievements — Summary</label>
+  <textarea id="achievements_info" name="achievements_info"><%= content.achievements_info %></textarea>
+
+  <button type="submit" class="btn btn-primary" style="margin-top:22px;">Save All Changes</button>
+</form>
+
+<%- include('partials/admin-footer') %>

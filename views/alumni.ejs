@@ -1,0 +1,31 @@
+<%- include('partials/header') %>
+
+<section class="page-hero small">
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--gold);">Alumni Directory</span>
+    <h1>Fellow AMC old students</h1>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <% if (alumni.length === 0) { %>
+      <p style="color:#4a5568;">No approved profiles yet — be the first! Once admins approve signups, they'll show up here.</p>
+    <% } %>
+    <div class="grid-3">
+      <% alumni.forEach(function(a){ %>
+        <div class="alumnus-card">
+          <div class="avatar"><%= a.fullName.split(' ').map(function(n){return n[0]}).slice(0,2).join('') %></div>
+          <h3><%= a.fullName %></h3>
+          <div class="meta">
+            <% if (a.gradYear) { %>Class of <%= a.gradYear %><br><% } %>
+            <% if (a.occupation) { %><%= a.occupation %><br><% } %>
+            <% if (a.location) { %><%= a.location %><% } %>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,80 @@
+<%- include('partials/header') %>
+
+<section class="page-hero">
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--gold);">Ilorin · Kwara State</span>
+    <h1>Ajoshe Model College</h1>
+    <p>An independent alumni &amp; information hub for AMC — school info for prospective families, and a home for the alumni community to reconnect, share updates, and give back.</p>
+    <div style="margin-top:24px; display:flex; gap:12px; flex-wrap:wrap;">
+      <a href="/signup" class="btn btn-gold">Join the Alumni Directory</a>
+      <a href="/admissions" class="btn btn-outline">Admissions Info</a>
+    </div>
+  </div>
+</section>
+
+<section class="section-photo-bg-3">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Recent achievements</span>
+      <h2 style="color: aliceblue;">Students representing AMC with pride</h2>
+      <p style="color: white;">A couple of recent wins from AMC students at inter-school competitions.</p>
+    </div>
+    <div class="photo-grid">
+      <figure>
+        <img src="/images/achievement-2nd-runner-up.png" alt="AMC students receiving 2nd Runner Up award">
+        <figcaption>2nd Runner Up — Enterprise &amp; Model Global Young Talents Initiative, March 2025</figcaption>
+      </figure>
+      <figure>
+        <img src="/images/achievement-punctuality-award.jpg" alt="AMC students receiving Punctuality Award">
+        <figcaption>Punctuality Award — Inter-School Design Competition</figcaption>
+      </figure>
+      <figure>
+        <img src="/images/facility-science-lab.jpg" alt="AMC Science Laboratory Complex">
+        <figcaption>Science Laboratory Complex — ETF Intervention Project</figcaption>
+      </figure>
+    </div>
+    <div style="margin-top:24px;"><a href="/achievements" class="btn btn-primary">See all achievements →</a></div>
+  </div>
+</section>
+
+<section class="section-photo-bg">
+  <div class="wrap grid-2">
+    <div>
+      <span class="eyebrow">News &amp; updates</span>
+      <h2 style="margin:8px 0 20px;">What's happening at AMC</h2>
+      <% if (news.length === 0) { %>
+        <p style="color:#4a5568;">No news posts yet — check back soon.</p>
+      <% } %>
+      <% news.forEach(function(post){ %>
+        <div class="card" style="margin-bottom:16px;">
+          <h3 style="font-size:1.1rem; margin-bottom:6px;"><a href="/news/<%= post.slug %>"><%= post.title %></a></h3>
+          <p style="color:#4a5568; font-size:0.88rem;"><%= post.body.slice(0,120) %>&hellip;</p>
+        </div>
+      <% }) %>
+    </div>
+    <div>
+      <span class="eyebrow">Upcoming events</span>
+      <h2 style="margin:8px 0 20px;">Reunions &amp; gatherings</h2>
+      <% if (upcomingEvents.length === 0) { %>
+        <p style="color:#4a5568;">No events scheduled yet.</p>
+      <% } %>
+      <% upcomingEvents.forEach(function(ev){ %>
+        <div class="card" style="margin-bottom:16px;">
+          <h3 style="font-size:1.1rem;"><%= ev.title %></h3>
+          <p style="color:#4a5568; font-size:0.88rem; margin-top:4px;"><%= ev.startsAt.toDateString() %> <% if(ev.location) { %>· <%= ev.location %><% } %></p>
+        </div>
+      <% }) %>
+      <a href="/events" class="btn btn-primary" style="margin-top:8px;">View all events →</a>
+    </div>
+  </div>
+</section>
+
+<section class="section-photo-bg-2">
+  <div class="wrap" style="text-align:center;">
+    <h2 style="color: #069bd6;">Are you an AMC old student?</h2>
+    <p style="color:#fafbfd; margin:12px auto 24px; max-width:52ch;">Join the alumni directory to reconnect with classmates, hear about reunions, and stay part of the AMC community.</p>
+    <a href="/signup" class="btn btn-green" style="padding:14px 28px;">Join the Directory</a>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

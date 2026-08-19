@@ -1,0 +1,28 @@
+<%- include('partials/header') %>
+
+<section class="page-hero small">
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--gold);">Events</span>
+    <h1>Reunions &amp; get-togethers</h1>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <% if (events.length === 0) { %>
+      <p style="color:#4a5568;">No events on the calendar yet. Check back soon, or if you're an admin, add one from the dashboard.</p>
+    <% } %>
+    <div class="grid-3">
+      <% events.forEach(function(ev){ %>
+        <div class="card">
+          <span class="eyebrow"><%= ev.startsAt.toDateString() %></span>
+          <h3 style="margin-top:8px;"><%= ev.title %></h3>
+          <% if (ev.location) { %><p style="color:#4a5568; font-size:0.9rem; margin-top:4px;">📍 <%= ev.location %></p><% } %>
+          <% if (ev.description) { %><p style="color:#4a5568; font-size:0.92rem; margin-top:10px;"><%= ev.description %></p><% } %>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

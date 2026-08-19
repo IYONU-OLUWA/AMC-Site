@@ -1,0 +1,72 @@
+// Prisma schema for the AMC alumni & school site.
+// Run `npx prisma migrate dev --name init` after setting DATABASE_URL in .env
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  ALUMNUS
+}
+
+enum Status {
+  PENDING   // signed up, waiting for admin approval
+  APPROVED  // visible in the public alumni directory
+  REJECTED  // hidden, kept for record
+}
+
+model User {
+  id            Int      @id @default(autoincrement())
+  fullName      String
+  email         String   @unique
+  passwordHash  String
+  role          Role     @default(ALUMNUS)
+  status        Status   @default(PENDING)
+
+  // Alumni profile fields (optional — filled in after signup)
+  gradYear      Int?
+  occupation    String?
+  location      String?
+  bio           String?
+  photoUrl      String?
+
+  posts         NewsPost[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model NewsPost {
+  id          Int      @id @default(autoincrement())
+  title       String
+  slug        String   @unique
+  body        String   // stored as HTML/markdown text
+  coverImage  String?
+  published   Boolean  @default(true)
+  author      User     @relation(fields: [authorId], references: [id])
+  authorId    Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Event {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  location    String?
+  startsAt    DateTime
+  createdAt   DateTime @default(now())
+}
+
+model SiteContent {
+  // Simple key-value store for editable page sections
+  // e.g. key = "about_history", key = "founder_bio", key = "admissions_info"
+  key       String   @id
+  value     String
+  updatedAt DateTime @updatedAt
+}

@@ -1,0 +1,37 @@
+<%- include('partials/admin-header') %>
+
+<div class="admin-topbar">
+  <h1 style="font-size:1.5rem;">Pending Alumni Requests</h1>
+</div>
+
+<% if (pending.length === 0) { %>
+  <p style="color:#5B6478;">No pending requests right now — you're all caught up.</p>
+<% } else { %>
+  <table>
+    <thead>
+      <tr><th>Name</th><th>Email</th><th>Grad Year</th><th>Occupation</th><th>Location</th><th>Signed Up</th><th>Action</th></tr>
+    </thead>
+    <tbody>
+      <% pending.forEach(function(u){ %>
+        <tr>
+          <td><%= u.fullName %></td>
+          <td><%= u.email %></td>
+          <td><%= u.gradYear || '—' %></td>
+          <td><%= u.occupation || '—' %></td>
+          <td><%= u.location || '—' %></td>
+          <td><%= u.createdAt.toDateString() %></td>
+          <td style="white-space:nowrap;">
+            <form action="/admin/alumni-requests/<%= u.id %>/approve" method="POST" style="display:inline;">
+              <button type="submit" class="btn btn-primary btn-sm">Approve</button>
+            </form>
+            <form action="/admin/alumni-requests/<%= u.id %>/reject" method="POST" style="display:inline;">
+              <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+<% } %>
+
+<%- include('partials/admin-footer') %>

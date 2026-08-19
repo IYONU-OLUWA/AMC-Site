@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title><%= title %> · AMC Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="admin-shell">
+  <aside class="admin-side">
+    <a href="/" class="brand" style="margin-bottom:28px; display:flex; align-items:center; gap:10px;">
+      <img src="/images/logo.png" alt="AMC" style="height:36px; width:36px; object-fit:contain;">
+      <span style="font-family:'Fraunces',serif; font-weight:700;">AMC Admin</span>
+    </a>
+    <a href="/admin">Dashboard</a>
+    <a href="/admin/alumni-requests">Alumni Requests</a>
+    <a href="/admin/manage-admins">Manage Admins</a>
+    <a href="/admin/news">News Posts</a>
+    <a href="/admin/events">Events</a>
+    <a href="/admin/content">Site Content</a>
+    <a href="/alumni" style="margin-top:20px; opacity:0.6;">↩ View Directory</a>
+    <a href="/" style="opacity:0.6;">↩ View Site</a>
+    <form action="/logout" method="POST" style="margin-top:10px;">
+      <button type="submit" class="btn btn-outline btn-sm" style="width:100%; color:#fff; border-color:rgba(255,255,255,0.3);">Log Out</button>
+    </form>
+  </aside>
+  <main class="admin-main">
+    <% if (typeof messages !== 'undefined' && messages.error && messages.error.length) { %>
+      <% messages.error.forEach(function(m){ %><div class="flash flash-error"><%= m %></div><% }) %>
+    <% } %>
+    <% if (typeof messages !== 'undefined' && messages.success && messages.success.length) { %>
+      <% messages.success.forEach(function(m){ %><div class="flash flash-success"><%= m %></div><% }) %>
+    <% } %>

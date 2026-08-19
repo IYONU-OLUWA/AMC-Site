@@ -1,0 +1,25 @@
+<%- include('partials/header') %>
+
+<section class="page-hero small">
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--gold);">News</span>
+    <h1>Updates from AMC</h1>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <% if (news.length === 0) { %>
+      <p style="color:#4a5568;">No news posts yet — check back soon.</p>
+    <% } %>
+    <% news.forEach(function(post){ %>
+      <div class="card" style="margin-bottom:18px;">
+        <h3 style="font-size:1.2rem; margin-bottom:8px;"><a href="/news/<%= post.slug %>"><%= post.title %></a></h3>
+        <p style="color:#4a5568;"><%= post.body.slice(0,180) %>&hellip;</p>
+        <p style="color:#8a94a3; font-size:0.8rem; margin-top:10px;">By <%= post.author.fullName %> · <%= post.createdAt.toDateString() %></p>
+      </div>
+    <% }) %>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

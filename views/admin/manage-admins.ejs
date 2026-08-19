@@ -1,0 +1,48 @@
+<%- include('partials/admin-header') %>
+
+<div class="admin-topbar">
+  <h1 style="font-size:1.5rem;">Manage Admins</h1>
+</div>
+
+<h3 style="margin-bottom:14px;">Current Admins</h3>
+<table style="margin-bottom:36px;">
+  <thead><tr><th>Name</th><th>Email</th><th>Action</th></tr></thead>
+  <tbody>
+    <% admins.forEach(function(a){ %>
+      <tr>
+        <td><%= a.fullName %></td>
+        <td><%= a.email %></td>
+        <td>
+          <form action="/admin/manage-admins/<%= a.id %>/demote" method="POST">
+            <button type="submit" class="btn btn-outline btn-sm">Remove admin access</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<h3 style="margin-bottom:14px;">Promote an Alumnus to Admin</h3>
+<% var nonAdmins = alumni.filter(function(a){ return a.role !== 'ADMIN'; }); %>
+<% if (nonAdmins.length === 0) { %>
+  <p style="color:#5B6478;">No approved alumni available to promote yet.</p>
+<% } else { %>
+  <table>
+    <thead><tr><th>Name</th><th>Email</th><th>Action</th></tr></thead>
+    <tbody>
+      <% nonAdmins.forEach(function(a){ %>
+        <tr>
+          <td><%= a.fullName %></td>
+          <td><%= a.email %></td>
+          <td>
+            <form action="/admin/manage-admins/<%= a.id %>/promote" method="POST">
+              <button type="submit" class="btn btn-primary btn-sm">Make admin</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+<% } %>
+
+<%- include('partials/admin-footer') %>

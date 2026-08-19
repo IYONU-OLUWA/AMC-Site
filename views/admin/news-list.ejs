@@ -1,0 +1,37 @@
+<%- include('partials/admin-header') %>
+
+<div class="admin-topbar">
+  <h1 style="font-size:1.5rem;">News Posts</h1>
+  <a href="/admin/news/new" class="btn btn-primary">+ New Post</a>
+</div>
+
+<% if (news.length === 0) { %>
+  <p style="color:#5B6478;">No posts yet. Create your first one.</p>
+<% } else { %>
+  <table>
+    <thead><tr><th>Title</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
+    <tbody>
+      <% news.forEach(function(post){ %>
+        <tr>
+          <td><%= post.title %></td>
+          <td>
+            <% if (post.published) { %>
+              <span class="badge badge-alumnus">Published</span>
+            <% } else { %>
+              <span class="badge badge-admin">Draft</span>
+            <% } %>
+          </td>
+          <td><%= post.createdAt.toDateString() %></td>
+          <td style="white-space:nowrap;">
+            <a href="/admin/news/<%= post.id %>/edit" class="btn btn-outline btn-sm">Edit</a>
+            <form action="/admin/news/<%= post.id %>/delete" method="POST" style="display:inline;" onsubmit="return confirm('Delete this post?');">
+              <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+<% } %>
+
+<%- include('partials/admin-footer') %>
