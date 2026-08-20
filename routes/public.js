@@ -1,8 +1,21 @@
 const express = require('express');
+const multer = require('multer');
 const prisma = require('../lib/prisma');
 const { requireLogin } = require('../middleware/auth');
 
 const router = express.Router();
+
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 2 * 1024 * 1024 }, // 2MB max
+  fileFilter: (req, file, cb) => {
+    if (['image/jpeg', 'image/png', 'image/webp'].includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Only JPG, PNG, or WEBP images are allowed.'));
+    }
+  },
+});
 
 // Helper: fetch editable content blocks by key, falling back to placeholder text
 // so the site never shows a blank section before real content is added.
@@ -44,51 +57,3 @@ router.get('/founder', async (req, res) => {
 router.get('/admissions', async (req, res) => {
   const info = await getContent('admissions_info', 'PLACEHOLDER: Admission requirements, process, and intake periods.');
   const exams = await getContent('exams_info', 'PLACEHOLDER: External exams the school prepares students for (WAEC, NECO, JAMB, etc.) and notable results.');
-  res.render('admissions', { title: 'Admissions', info, exams });
-});
-
-router.get('/achievements', async (req, res) => {
-  const achievements = await getContent('achievements_info', 'PLACEHOLDER: Awards, notable alumni, and academic or sports wins.');
-  res.render('achievements', { title: 'Achievements', achievements });
-});
-
-router.get('/contact', (req, res) => {
-  res.render('contact', { title: 'Contact Us' });
-});
-
-router.get('/news', async (req, res) => {
-  const news = await prisma.newsPost.findMany({
-    where: { published: true },
-    orderBy: { createdAt: 'desc' },
-    include: { author: true },
-  });
-  res.render('news', { title: 'News & Updates', news });
-});
-
-router.get('/news/:slug', async (req, res) => {
-  const post = await prisma.newsPost.findUnique({
-    where: { slug: req.params.slug },
-    include: { author: true },
-  });
-  if (!post || !post.published) {
-    req.flash('error', 'That news post could not be found.');
-    return res.redirect('/news');
-  }
-  res.render('news-post', { title: post.title, post });
-});
-
-router.get('/events', async (req, res) => {
-  const events = await prisma.event.findMany({ orderBy: { startsAt: 'asc' } });
-  res.render('events', { title: 'Events & Reunions', events });
-});
-
-// ---- Alumni directory (visible to logged-in alumni only) ----
-router.get('/alumni', requireLogin, async (req, res) => {
-  const alumni = await prisma.user.findMany({
-    where: { status: 'APPROVED' },
-    orderBy: { gradYear: 'desc' },
-  });
-  res.render('alumni', { title: 'Alumni Directory', alumni });
-});
-
-module.exports = router;

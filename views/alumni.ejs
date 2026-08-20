@@ -7,20 +7,47 @@
   </div>
 </section>
 
+<% if (whatsappLink) { %>
+<section style="padding:0;">
+  <div class="wrap" style="padding-top:32px;">
+    <div class="whatsapp-banner">
+      <div>
+        <h3 style="color:#fff; margin-bottom:6px;">Join the AMC Alumni WhatsApp Group</h3>
+        <p>Reunions, quick updates, and staying in touch — all happen there first.</p>
+      </div>
+      <a href="<%= whatsappLink %>" target="_blank" rel="noopener" class="btn btn-gold">Join the Group →</a>
+    </div>
+  </div>
+</section>
+<% } %>
+
 <section>
   <div class="wrap">
-    <% if (alumni.length === 0) { %>
-      <p style="color:#4a5568;">No approved profiles yet — be the first! Once admins approve signups, they'll show up here.</p>
-    <% } %>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-wrap:wrap; gap:12px;">
+      <p style="color:#4a5568; margin:0;">
+        <% if (alumni.length === 0) { %>
+          No approved profiles yet — be the first! Once admins approve signups, they'll show up here.
+        <% } else { %>
+          <%= alumni.length %> alumni in the directory
+        <% } %>
+      </p>
+      <a href="/profile" class="btn btn-outline btn-sm" style="color:var(--navy); border-color:var(--line);">Edit My Profile</a>
+    </div>
+
     <div class="grid-3">
       <% alumni.forEach(function(a){ %>
         <div class="alumnus-card">
-          <div class="avatar"><%= a.fullName.split(' ').map(function(n){return n[0]}).slice(0,2).join('') %></div>
+          <% if (a.photoUrl) { %>
+            <img src="<%= a.photoUrl %>" alt="<%= a.fullName %>" class="avatar-photo">
+          <% } else { %>
+            <div class="avatar"><%= a.fullName.split(' ').map(function(n){return n[0]}).slice(0,2).join('') %></div>
+          <% } %>
           <h3><%= a.fullName %></h3>
           <div class="meta">
             <% if (a.gradYear) { %>Class of <%= a.gradYear %><br><% } %>
             <% if (a.occupation) { %><%= a.occupation %><br><% } %>
-            <% if (a.location) { %><%= a.location %><% } %>
+            <% if (a.location) { %><%= a.location %><br><% } %>
+            <% if (a.phone) { %><a href="tel:<%= a.phone %>" style="color:var(--green-dark); font-weight:600;"><%= a.phone %></a><% } %>
           </div>
         </div>
       <% }) %>

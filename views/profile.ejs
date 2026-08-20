@@ -1,0 +1,45 @@
+<%- include('partials/header') %>
+
+<section class="page-hero small">
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--gold);">My Profile</span>
+    <h1>Update your details</h1>
+  </div>
+</section>
+
+<section>
+  <div class="wrap" style="max-width:520px;">
+    <div class="form-card" style="margin:0;">
+      <% if (currentUser.photoUrl) { %>
+        <img src="<%= currentUser.photoUrl %>" alt="Your profile photo" style="width:96px; height:96px; border-radius:50%; object-fit:cover; margin-bottom:18px; border:3px solid var(--line);">
+      <% } else { %>
+        <div class="avatar" style="width:96px; height:96px; font-size:1.8rem; margin-bottom:18px;"><%= currentUser.fullName.split(' ').map(function(n){return n[0]}).slice(0,2).join('') %></div>
+      <% } %>
+
+      <form action="/profile" method="POST" enctype="multipart/form-data">
+        <label for="photo">Profile Photo</label>
+        <input type="file" id="photo" name="photo" accept="image/jpeg,image/png,image/webp">
+        <p style="font-size:0.78rem; color:#4a5568; margin-top:4px;">JPG, PNG, or WEBP — under 2MB.</p>
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" value="<%= currentUser.phone || '' %>" placeholder="e.g. 0801 234 5678">
+
+        <label for="gradYear">Graduation Year</label>
+        <input type="number" id="gradYear" name="gradYear" value="<%= currentUser.gradYear || '' %>">
+
+        <label for="occupation">Current Occupation</label>
+        <input type="text" id="occupation" name="occupation" value="<%= currentUser.occupation || '' %>">
+
+        <label for="location">Current Location</label>
+        <input type="text" id="location" name="location" value="<%= currentUser.location || '' %>">
+
+        <label for="bio">Short Bio</label>
+        <textarea id="bio" name="bio" placeholder="A line or two about yourself"><%= currentUser.bio || '' %></textarea>
+
+        <button type="submit" class="btn btn-green form-submit">Save Changes</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

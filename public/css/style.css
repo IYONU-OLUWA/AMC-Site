@@ -192,6 +192,21 @@ footer.site-footer .fine{font-size:0.78rem; opacity:0.6; margin-top:24px; text-a
 .badge-alumnus{background:rgba(14,42,82,0.08); color:var(--navy);}
 .checkbox-row{display:flex; align-items:center; gap:8px; margin-top:14px;}
 .checkbox-row input{width:auto;}
+
+/* whatsapp banner + alumni photos */
+.whatsapp-banner{
+  background:linear-gradient(120deg, var(--green) 0%, var(--green-dark) 100%);
+  border-radius:20px; padding:28px 32px; color:#fff;
+  display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap;
+}
+.whatsapp-banner p{color:rgba(255,255,255,0.88); font-size:0.92rem; margin:0;}
+.avatar-photo{
+  width:64px; height:64px; border-radius:50%; object-fit:cover; margin:0 auto 12px; display:block;
+  border:2px solid var(--line);
+}
+@media (max-width:600px){
+  .whatsapp-banner{flex-direction:column; text-align:center;}
+}
 @media (max-width:860px){
   .admin-shell{grid-template-columns:1fr;}
   .admin-side{position:static; height:auto; display:flex; overflow-x:auto; gap:4px; white-space:nowrap;}

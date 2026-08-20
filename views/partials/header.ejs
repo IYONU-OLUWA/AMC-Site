@@ -15,31 +15,45 @@
       <img src="/images/logo.png" alt="Ajoshe Model College crest">
       <span class="brand-text">Ajoshe Model College<small>Ilorin, Kwara State</small></span>
     </a>
-    <nav class="main-nav">
-      <a href="/about">About</a>
-      <a href="/admissions">Admissions</a>
-      <a href="/achievements">Achievements</a>
-      <a href="/news">News</a>
-      <a href="/events">Events</a>
-      <a href="/contact">Contact</a>
-    </nav>
-    <div class="nav-actions">
-      <% if (typeof currentUser !== 'undefined' && currentUser) { %>
-        <% if (currentUser.role === 'ADMIN') { %>
-          <a href="/admin" class="btn btn-outline">Admin</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-collapse" id="navCollapse">
+      <nav class="main-nav">
+        <a href="/about">About</a>
+        <a href="/admissions">Admissions</a>
+        <a href="/achievements">Achievements</a>
+        <a href="/news">News</a>
+        <a href="/events">Events</a>
+        <a href="/contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <% if (typeof currentUser !== 'undefined' && currentUser) { %>
+          <% if (currentUser.role === 'ADMIN') { %>
+            <a href="/admin" class="btn btn-outline">Admin</a>
+           <% } else { %>
+            <a href="/alumni" class="btn btn-outline">Directory</a>
+            <a href="/profile" class="btn btn-outline">My Profile</a>
+          <% } %>
+          <form action="/logout" method="POST" style="display:inline;">
+            <button type="submit" class="btn btn-gold">Log Out</button>
+          </form>
         <% } else { %>
-          <a href="/alumni" class="btn btn-outline">Directory</a>
+          <a href="/login" class="btn btn-outline">Log In</a>
+          <a href="/signup" class="btn btn-gold">Join Alumni</a>
         <% } %>
-        <form action="/logout" method="POST" style="display:inline;">
-          <button type="submit" class="btn btn-gold">Log Out</button>
-        </form>
-      <% } else { %>
-        <a href="/login" class="btn btn-outline">Log In</a>
-        <a href="/signup" class="btn btn-gold">Join Alumni</a>
-      <% } %>
+      </div>
     </div>
   </div>
 </header>
+<script>
+  document.getElementById('navToggle').addEventListener('click', function(){
+    var collapse = document.getElementById('navCollapse');
+    var expanded = this.getAttribute('aria-expanded') === 'true';
+    this.setAttribute('aria-expanded', !expanded);
+    collapse.classList.toggle('open');
+  });
+</script>
 <div class="motto-strip">"Education is the Best Legacy"</div>
 
 <main>
