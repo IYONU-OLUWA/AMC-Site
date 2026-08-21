@@ -24,8 +24,12 @@
   <label for="exams_info">Admissions — External Exams</label>
   <textarea id="exams_info" name="exams_info"><%= content.exams_info %></textarea>
 
-  <label for="achievements_info">Achievements — Summary</label>
+    <label for="achievements_info">Achievements — Summary</label>
   <textarea id="achievements_info" name="achievements_info"><%= content.achievements_info %></textarea>
+
+  <label for="whatsapp_group_link">Alumni WhatsApp Group — Invite Link</label>
+  <input type="url" id="whatsapp_group_link" name="whatsapp_group_link" value="<%= content.whatsapp_group_link %>" placeholder="https://chat.whatsapp.com/...">
+  <p style="font-size:0.8rem; color:#5B6478; margin-top:4px;">Shown to alumni right after they log in. Get this from WhatsApp: Group Info → Invite via Link.</p>
 
   <button type="submit" class="btn btn-primary" style="margin-top:22px;">Save All Changes</button>
 </form>

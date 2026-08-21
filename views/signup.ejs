@@ -10,7 +10,7 @@
     <div class="form-card">
       <h2>Create Your Account</h2>
       <p class="sub">An admin will review and approve your profile before it appears in the directory.</p>
-      <form action="/signup" method="POST">
+      <form action="/signup" method="POST" enctype="multipart/form-data">
         <label for="fullName">Full Name</label>
         <input type="text" id="fullName" name="fullName" required>
 
@@ -29,12 +29,12 @@
         <label for="occupation">Current Occupation</label>
         <input type="text" id="occupation" name="occupation" placeholder="e.g. Software Engineer">
 
-        <label for="number">Phone Number</label>
-        <input type="tel" id="tel" name="tel" placeholder="e.g. 012345678">
-
-
         <label for="location">Current Location</label>
         <input type="text" id="location" name="location" placeholder="e.g. Lagos, Nigeria">
+
+        <label for="photo">Profile Photo (optional)</label>
+        <input type="file" id="photo" name="photo" accept="image/jpeg,image/png,image/webp">
+        <p style="font-size:0.78rem; color:#4a5568; margin-top:4px;">JPG, PNG, or WEBP — under 2MB. You can also add this later.</p>
 
         <button type="submit" class="btn btn-green form-submit">Create Account</button>
       </form>
